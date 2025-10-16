@@ -1,4 +1,4 @@
-import { ArrowRight, MapPin, TrendingUp } from "lucide-react";
+import { ArrowRight, MapPin } from "lucide-react";
 import {
   XAxis,
   Tooltip,
@@ -26,36 +26,38 @@ export default function YourSituation() {
       </h1>
 
       <div className="grid grid-cols-12 gap-4 mb-8 ">
-        <div className="bg-[linear-gradient(0deg,#DBF681_0%,#91CB50_100%)] rounded-2xl col-span-4 px-6 py-4">
-          <h2 className="text-2xl font-medium text-[#12151A] mb-7">
+        <div className="bg-[linear-gradient(0deg,#DBF681_0%,#91CB50_100%)] rounded-[24px] col-span-3 px-6 py-4 flex flex-col">
+          <h2 className="2xl:text-2xl text-lg font-medium text-[#12151A] mb-7 tracking-[0.2px]">
             Your current <br />
             electricity costs:
           </h2>
-          <div className="flex items-baseline gap-2 mb-3">
+          <div className="flex items-baseline gap-2 mb-3 flex-1">
             <span
-              className="text-5xl font-bold text-foreground"
+              className="2xl:text-5xl text-3xl font-semibold text-[#12151A] tracking-[0.2px]"
               data-testid="text-annual-cost">
               €1053
             </span>
-            <span className="text-lg text-muted-foreground">per year</span>
+            <span className="font-light 2xl:text-xl text-lg text-[#12151A] tracking-[0.2px]">
+              per year
+            </span>
           </div>
-          <p className="text-lg text-[#12151A]">
+          <p className="2xl:text-lg text-sm text-[#12151A] font-normal max-w-[247px]">
             Based on €0.26 per kWh × 4,000 kWh annually
           </p>
         </div>
 
-        <div className="col-span-8">
+        <div className="col-span-9">
           <div className="rounded-3xl overflow-hidden h-full relative">
             <img
               src={house}
               alt="Your property"
-              className="w-full h-full object-cover min-h-[254px] max-h-[254px]"
+              className="w-full h-full object-fill min-h-[254px]"
               data-testid="img-house"
             />
-            <div className="absolute bottom-2 left-1/2 tranform -translate-x-1/2 flex items-center gap-2 bg-background/95 backdrop-blur-sm px-3 py-2 rounded-lg shadow-lg">
+            <div className="absolute bottom-2 left-1/2 tranform -translate-x-1/2 flex items-center justify-center gap-2 bg-black/[28%] w-[225px] h-[24px] rounded-full">
               <MapPin className="w-4 h-4 text-white" />
               <span
-                className="text-sm font-medium text-white"
+                className="text-base font-light text-white"
                 data-testid="text-address">
                 Hinderdam 35, Giethoorn
               </span>
@@ -67,24 +69,23 @@ export default function YourSituation() {
       {/* Usage Pattern Section */}
       <div className="flex justify-between items-center bg-[#FAFAFA] rounded-3xl py-5 px-8">
         <div>
-          <h2 className="text-2xl font-semibold text-[#12151A] mb-3.5">
+          <h2 className="text-2xl font-medium text-[#12151A] mb-3.5 tracking-[0.2px]">
             Your usage pattern:
           </h2>
-          <p className="text-lg text-[#12151A] mb-8 max-w-[428px]">
+          <p className="text-lg text-[#12151A] mb-8 max-w-[428px] font-light">
             To provide the best solar panel advice and ensure an accurate
             savings calculation, we've mapped out your current energy usage
             pattern. The graph shows your typical consumption.
           </p>
           <button
             type="button"
-            className="cursor-pointer flex items-center gap-2 text-base font-medium text-[#16303D] px-3 py-2 rounded-md transition-colors">
-            <TrendingUp className="w-4 h-4" />
+            className="cursor-pointer flex items-center gap-2 text-base font-medium text-[#16303D] py-2 rounded-md transition-colors hover:text-[#91CB50]">
             Consumption pattern details
             <ArrowRight className="w-4 h-4" />
           </button>
         </div>
 
-        <div className="max-w-[500px] w-full">
+        <div className="max-w-[650px] w-full">
           <div className="flex justify-between text-sm font-medium text-foreground mb-2">
             <span>Morning</span>
             <span>Afternoon</span>

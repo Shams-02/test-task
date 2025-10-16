@@ -62,14 +62,14 @@ function ConsultationApp() {
   return (
     <div className="flex h-screen overflow-hidden gap-4 bg-[#F6F8EF] p-4">
       <Aside currentStep={currentStep} onStepClick={handleStepClick} />
-      <main className="h-[calc(100vh-32px)] overflow-y-auto scrollbar--tiny flex flex-col gap-4 w-full">
+      <main className="h-[calc(100vh-32px)] flex flex-col gap-4 w-full overflow-y-auto scrollbar--tiny  flex-1 h-full">
         {renderCurrentStep()}
         {currentStep > 1 && (
-          <div className="flex justify-end gap-5 items-center">
+          <div className="flex justify-end gap-5 items-center bg-transparent">
             <button
               type="button"
               onClick={handlePrevious}
-              className="bg-[#FCFFF0] rounded-full cursor-pointer flex gap-1 items-center justify-center shadow-[0_1px_2px_0_#0000000D] h-14 text-xl font-medium text-black px-14"
+              className="bg-[#FCFFF0] rounded-full cursor-pointer flex gap-1 items-center justify-center shadow-[0_1px_2px_0_#0000000D] h-14 text-xl font-medium text-black px-14  hover:bg-[#91CB50] hover:text-white transition-all"
               data-testid="button-previous">
               <ArrowLeft className="w-5 h-5" />
               Previous
@@ -77,7 +77,7 @@ function ConsultationApp() {
             <button
               type="button"
               onClick={handleNext}
-              className="bg-[#D8EC82] rounded-full cursor-pointer flex gap-1 items-center justify-center shadow-[0_1px_2px_0_#0000000D] h-14 text-xl font-medium text-black px-14"
+              className="bg-[#D8EC82] hover:bg-[#91CB50] hover:text-white rounded-full cursor-pointer flex gap-1 items-center justify-center shadow-[0_1px_2px_0_#0000000D] h-14 text-xl font-medium text-black px-14  transition-all"
               data-testid="button-next">
               Next
               <ArrowRight className="w-5 h-5" />
