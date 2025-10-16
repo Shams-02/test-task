@@ -1,4 +1,4 @@
-import { Star, Phone } from "lucide-react";
+import { Star, } from "lucide-react";
 import { VolteraLogo } from "./VolteraLogo";
 import { consultationSteps } from "../../shared/schema";
 import { Avatar, AvatarFallback, AvatarImage } from "../components/ui/avatar";
