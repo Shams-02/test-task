@@ -57,7 +57,7 @@ export default function Introduction({ onNext }: IntroductionProps) {
         <button
           type="button"
           onClick={onNext}
-          className="w-full bg-[#D8EC82] h-14 flex items-center justify-center text-[#000000] font-medium text-lg py-6 rounded-full shadow-md hover:shadow-lg transition-all"
+          className="w-full bg-[#D8EC82] cursor-pointer h-14 flex items-center justify-center text-[#000000] font-medium text-lg py-6 rounded-full shadow-md hover:shadow-lg transition-all"
           data-testid="button-get-started"
         >
           Let's get started

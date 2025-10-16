@@ -1,6 +1,5 @@
 import { Button } from "../components/ui/button";
-import { Badge } from "../components/ui/badge";
-import { Leaf, Sun, Zap, ArrowUpRight, Plus, Minus } from "lucide-react";
+import { Sun, Zap, ArrowUpRight, Plus, Minus } from "lucide-react";
 import { XAxis, Tooltip, ResponsiveContainer, AreaChart, ReferenceLine, Area } from "recharts";
 import mainHouse from "../assets/images/main-house.png";
 
@@ -13,12 +12,12 @@ const usageData = [
 
 export default function SolarPanels() {
   return (
-    <div className="p-6 bg-white rounded-3xl">
+    <div className="p-6 bg-white rounded-3xl flex-1">
       <h1 className="text-4xl font-semibold text-center mb-6" data-testid="text-page-title">
         Optimal solar panel system
       </h1>
-      <div className="grid lg:grid-cols-2 gap-6 mb-8">
-        <div className="flex flex-col bg-[#FAFAFA] rounded-3xl p-6">
+      <div className="grid lg:grid-cols-5 gap-6">
+        <div className=" col-span-3 flex flex-col bg-[#FAFAFA] rounded-3xl p-6">
           <div className="">
             <h2 className="text-2xl font-medium text-[#12151A] mb-2">
               Ultra-performance solar panel system:
@@ -118,11 +117,11 @@ export default function SolarPanels() {
           </div>
         </div>
 
-        <div className="bg-card border-card-border rounded-2xl overflow-hidden relative">
+        <div className="col-span-2 rounded-2xl overflow-hidden relative">
           <img
             src={mainHouse}
             alt="Your property with solar panels"
-            className="w-full h-full object-cover min-h-[500px]"
+            className="w-full h-full object-cover min-h-[490px]"
             data-testid="img-house-solar"
           />
 

@@ -30,7 +30,7 @@ export function ConsultationSidebar({
   const completionPercentage = Math.round((currentStep / steps.length) * 100);
 
   return (
-    <aside className="w-80 h-screen bg-white text-gray-800 flex flex-col shadow-2xl shadow-purple-200 rounded-xl overflow-hidden">
+    <aside className="min-w-[244px] shrink-0 h-screen bg-white text-gray-800 flex flex-col shadow-2xl shadow-purple-200 rounded-xl overflow-hidden">
       <div className="p-6 border-b border-gray-100">
         <VolteraLogo />
         <div className="mt-4 flex items-center gap-2 justify-between">
@@ -56,7 +56,7 @@ export function ConsultationSidebar({
             <span className="text-sm font-bold text-gray-800">9.5</span>
           </div>
           <button
-            className="text-sm text-gray-500 hover:text-gray-800 transition-colors flex items-center justify-center"
+            className="text-sm text-[#12151A] hover:text-gray-800 transition-colors flex items-center justify-center"
             data-testid="link-reviews"
           >
             456 reviews
@@ -101,7 +101,7 @@ export function ConsultationSidebar({
         </div>
       </div>
 
-      <nav className="flex-1 px-6 py-4 overflow-y-auto">
+      <nav className="flex-1 p-6 overflow-y-auto">
         <div className="space-y-1">
           {steps.map((step, index) => {
             const isCompleted = step.id < currentStep;
@@ -169,7 +169,7 @@ export function ConsultationSidebar({
 
                 {index < steps.length - 1 && (
                   <div
-                    className={`absolute left-[27px] top-[52px] w-0.5 h-6 transition-colors ${lineClasses}`}
+                    className={`absolute left-[27px] top-[50px] w-0.5 h-6 transition-colors ${lineClasses}`}
                   />
                 )}
               </div>

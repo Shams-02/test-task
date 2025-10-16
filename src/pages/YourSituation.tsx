@@ -11,7 +11,7 @@ const usageData = [
 
 export default function YourSituation() {
   return (
-    <div className="p-6 bg-white rounded-3xl">
+    <div className="p-6 bg-white rounded-3xl flex-1">
       <h1 className="text-4xl font-semibold text-center mb-6" data-testid="text-page-title">
         Analysis of your current situation
       </h1>

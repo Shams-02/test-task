@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react";
-import { Toaster } from "./components/ui/toaster";
-import { TooltipProvider } from "./components/ui/tooltip";
 import { ConsultationSidebar } from "./components/ConsultationSidebar";
 import Introduction from "./pages/Introduction";
 import YourSituation from "./pages/YourSituation";
@@ -14,10 +12,9 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 
 
 function ConsultationApp() {
-  const [currentStep, setCurrentStep] = useState(3);
+  const [currentStep, setCurrentStep] = useState(1);
 
   useEffect(() => {
-    // Update page title based on current step
     const stepNames = consultationSteps.map((s) => s.label);
     document.title = `${stepNames[currentStep - 1]} - Voltera Solar Consultation`;
   }, [currentStep]);
@@ -56,13 +53,13 @@ function ConsultationApp() {
       case 3:
         return <SolarPanels />;
       case 4:
-        return <Savings onNext={handleNext} onPrevious={handlePrevious} />;
+        return <Savings />;
       case 5:
-        return <EnergySystem onNext={handleNext} onPrevious={handlePrevious} />;
+        return <EnergySystem />;
       case 6:
-        return <ServicePlan onNext={handleNext} onPrevious={handlePrevious} />;
+        return <ServicePlan />;
       case 7:
-        return <YourOffer onPrevious={handlePrevious} />;
+        return <YourOffer />;
       default:
         return null;
     }
@@ -74,14 +71,14 @@ function ConsultationApp() {
         currentStep={currentStep}
         onStepClick={handleStepClick}
       />
-      <main className="flex-1 overflow-y-auto flex flex-col gap-4">
+      <main className="h-[calc(100vh-32px)] overflow-y-auto flex flex-col gap-4 w-full">
         {renderCurrentStep()}
         {currentStep > 1 && (
           <div className="flex justify-end gap-5 items-center">
             <button
               type="button"
               onClick={handlePrevious}
-              className="bg-[#FCFFF0] rounded-full flex gap-1 items-center justify-center shadow-[0_1px_2px_0_#0000000D] h-14 text-xl font-medium text-black px-14"
+              className="bg-[#FCFFF0] rounded-full cursor-pointer flex gap-1 items-center justify-center shadow-[0_1px_2px_0_#0000000D] h-14 text-xl font-medium text-black px-14"
               data-testid="button-previous"
             >
               <ArrowLeft className="w-5 h-5" />
@@ -90,7 +87,7 @@ function ConsultationApp() {
             <button
               type="button"
               onClick={handleNext}
-              className="bg-[#D8EC82] rounded-full flex gap-1 items-center justify-center shadow-[0_1px_2px_0_#0000000D] h-14 text-xl font-medium text-black px-14"
+              className="bg-[#D8EC82] rounded-full cursor-pointer flex gap-1 items-center justify-center shadow-[0_1px_2px_0_#0000000D] h-14 text-xl font-medium text-black px-14"
               data-testid="button-next"
             >
               Next
@@ -105,10 +102,7 @@ function ConsultationApp() {
 
 function App() {
   return (
-    <TooltipProvider>
-      <ConsultationApp />
-      <Toaster />
-    </TooltipProvider>
+    <ConsultationApp />
   );
 }
 

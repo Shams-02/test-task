@@ -1,165 +1,131 @@
 import { Button } from "../components/ui/button";
-import { Card } from "../components/ui/card";
-import { Tabs, TabsList, TabsTrigger } from "../components/ui/tabs";
-import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
-import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import { ArrowUpRight } from "lucide-react";
+import { useState } from "react";
+import { Area, AreaChart, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, } from "recharts";
 
-interface SavingsProps {
-  onNext: () => void;
-  onPrevious: () => void;
-}
-
-const savingsData = [
-  { time: "Morning", usage: 0.5, yield: 0.3 },
-  { time: "", usage: 0.8, yield: 1.2 },
-  { time: "Afternoon", usage: 1.5, yield: 3.8 },
-  { time: "", usage: 2.2, yield: 2.8 },
-  { time: "Evening", usage: 2.8, yield: 1.2 },
-  { time: "", usage: 2.0, yield: 2.5 },
-  { time: "Night", usage: 1.2, yield: 3.2 },
-  { time: "", usage: 0.4, yield: 1.8 },
+const usageData = [
+  { label: 'Morning', usage: 20, yield: 22 },
+  { label: 'Afternoon', usage: 18, yield: 28 },
+  { label: 'Evening', usage: 30, yield: 20 },
+  { label: 'Night', usage: 35, yield: 25 },
 ];
 
-export default function Savings({ onNext, onPrevious }: SavingsProps) {
+export default function Savings() {
+  const [active, setActive] = useState(0)
   return (
-    <div className="min-h-screen bg-background p-8">
-      <div className="max-w-6xl mx-auto">
-        <h1 className="text-4xl font-semibold text-foreground mb-8" data-testid="text-page-title">
-          Savings analysis
-        </h1>
+    <div className="p-6 bg-white rounded-3xl flex-1">
+      <h1 className="text-4xl font-semibold text-center mb-6" data-testid="text-page-title">
+        Savings analysis
+      </h1>
 
-        {/* Tabs */}
-        <Tabs defaultValue="with-credits" className="mb-8">
-          <TabsList className="grid w-full max-w-2xl mx-auto grid-cols-2 h-14 bg-muted/50 p-1">
-            <TabsTrigger
-              value="with-credits"
-              className="text-base font-medium data-[state=active]:bg-background data-[state=active]:shadow-sm"
-              data-testid="tab-with-credits"
-            >
-              With energy credits
-            </TabsTrigger>
-            <TabsTrigger
-              value="without-credits"
-              className="text-base font-medium data-[state=active]:bg-background data-[state=active]:shadow-sm"
-              data-testid="tab-without-credits"
-            >
-              Without energy credits
-            </TabsTrigger>
-          </TabsList>
-        </Tabs>
+      <div defaultValue="with-credits" className="flex gap-4 mb-8 bg-[#F6F8EF] p-2 rounded-2xl">
+        <button
+          type="button"
+          className={`text-base cursor-pointer font-medium h-10 outline-none ${active === 0 ? "bg-white shadow-[0_3px_8px_0_#0000001F]" : ""} rounded-xl flex-1 flex items-center justify-center`}
+          data-testid="tab-with-credits"
+          onClick={() => setActive(0)}
+        >
+          With energy credits
+        </button>
+        <button
+          type="button"
+          className={`text-base cursor-pointer font-medium h-10 outline-none ${active === 1 ? "bg-white shadow-[0_3px_8px_0_#0000001F]" : ""} rounded-xl flex-1 flex items-center justify-center`}
+          data-testid="tab-without-credits"
+          onClick={() => setActive(1)}
+        >
+          Without energy credits
+        </button>
+      </div>
 
-        {/* Savings Amount */}
-        <div className="text-center mb-8">
-          <div className="flex items-baseline justify-center gap-3 mb-3">
+      <div className="text-center mb-8">
+        <div className="flex items-baseline justify-center gap-3 mb-3">
+          {active === 0 ? (
             <span className="text-6xl font-bold text-foreground" data-testid="text-savings-amount">
               €950
             </span>
-            <span className="text-xl text-muted-foreground">per year</span>
-          </div>
-          <Button
-            variant="ghost"
-            className="inline-flex items-center gap-2 text-foreground font-medium underline decoration-2 underline-offset-4 px-3 py-1.5 h-auto"
-            data-testid="link-how-savings-work"
-          >
-            How your savings work
-            <ArrowUpRight className="w-4 h-4" />
-          </Button>
+          ) : (
+            <span className="text-6xl font-bold text-foreground" data-testid="text-savings-amount">
+              €1053
+            </span>
+          )}
+          <span className="text-xl text-muted-foreground">per year</span>
+        </div>
+        <Button
+          variant="ghost"
+          className="inline-flex items-center cursor-pointer gap-2 text-foreground font-medium underline decoration-2 underline-offset-4 px-3 py-1.5 h-auto"
+          data-testid="link-how-savings-work"
+        >
+          How your savings work
+          <ArrowUpRight className="w-4 h-4" />
+        </Button>
+      </div>
+
+      <div className="rounded-2xl p-8">
+        <div className="flex justify-between text-sm font-medium text-foreground mb-2">
+          <span>Morning</span>
+          <span>Afternoon</span>
+          <span>Evening</span>
+          <span>Night</span>
         </div>
 
-        {/* Chart */}
-        <Card className="bg-card border-card-border rounded-2xl p-8 mb-8">
-          <div className="flex justify-between items-center mb-6">
-            <div className="flex gap-8 text-sm font-medium text-foreground">
-              <span>Morning</span>
-              <span>Afternoon</span>
-              <span>Evening</span>
-              <span>Night</span>
-            </div>
+        <ResponsiveContainer width="100%" height={280}>
+          <AreaChart data={usageData} margin={{ top: 0, right: 0, left: 0, bottom: 0 }}>
+            <defs>
+              <linearGradient id="yieldGradient" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#FFE70F" stopOpacity={0.9} />
+                <stop offset="100%" stopColor="#fff" stopOpacity={0.3} />
+              </linearGradient>
+
+              <linearGradient id="usageGradient" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#7FC241" stopOpacity={0.9} />
+                <stop offset="100%" stopColor="#fff" stopOpacity={0.3} />
+              </linearGradient>
+            </defs>
+
+            <XAxis
+              dataKey="label"
+              axisLine={false}
+              tickLine={false}
+              tick={{ fontSize: 16, fontWeight: 600 }}
+            />
+
+            <Tooltip contentStyle={{ display: 'none' }} cursor={false} />
+
+            <ReferenceLine x="Morning" stroke="#ccc" strokeDasharray="3 3" />
+            <ReferenceLine x="Afternoon" stroke="#ccc" strokeDasharray="3 3" />
+            <ReferenceLine x="Evening" stroke="#ccc" strokeDasharray="3 3" />
+            <ReferenceLine x="Night" stroke="#ccc" strokeDasharray="3 3" />
+
+            <Area
+              type="monotone"
+              dataKey="yield"
+              stroke="#FFE70F"
+              strokeWidth={3}
+              fill="url(#yieldGradient)"
+            />
+
+            <Area
+              type="monotone"
+              dataKey="usage"
+              stroke="#7FC241"
+              strokeWidth={3}
+              fill="url(#usageGradient)"
+            />
+          </AreaChart>
+        </ResponsiveContainer>
+
+        <div className="flex items-center justify-center gap-8 mt-6">
+          <div className="flex items-center gap-2">
+            <div className="w-12 h-2 bg-[#97CF55]"></div>
+            <span className="text-sm text-muted-foreground">Your current personal usage pattern</span>
           </div>
-
-          <ResponsiveContainer width="100%" height={350}>
-            <AreaChart data={savingsData}>
-              <defs>
-                <linearGradient id="colorUsageGreen" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="hsl(var(--primary))" stopOpacity={0.4} />
-                  <stop offset="95%" stopColor="hsl(var(--primary))" stopOpacity={0.1} />
-                </linearGradient>
-                <linearGradient id="colorYield" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="hsl(var(--chart-3))" stopOpacity={0.4} />
-                  <stop offset="95%" stopColor="hsl(var(--chart-3))" stopOpacity={0.1} />
-                </linearGradient>
-              </defs>
-              <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" opacity={0.3} />
-              <XAxis
-                dataKey="time"
-                stroke="hsl(var(--muted-foreground))"
-                tick={{ fill: "hsl(var(--muted-foreground))" }}
-                tickLine={false}
-              />
-              <YAxis
-                stroke="hsl(var(--muted-foreground))"
-                tick={{ fill: "hsl(var(--muted-foreground))" }}
-                tickLine={false}
-              />
-              <Tooltip
-                contentStyle={{
-                  backgroundColor: "hsl(var(--card))",
-                  border: "1px solid hsl(var(--border))",
-                  borderRadius: "8px",
-                }}
-              />
-              <Area
-                type="monotone"
-                dataKey="usage"
-                stroke="hsl(var(--primary))"
-                strokeWidth={3}
-                fill="url(#colorUsageGreen)"
-              />
-              <Area
-                type="monotone"
-                dataKey="yield"
-                stroke="hsl(var(--chart-3))"
-                strokeWidth={3}
-                fill="url(#colorYield)"
-              />
-            </AreaChart>
-          </ResponsiveContainer>
-
-          <div className="flex items-center justify-center gap-8 mt-6">
-            <div className="flex items-center gap-2">
-              <div className="w-12 h-1 bg-primary rounded-full"></div>
-              <span className="text-sm text-muted-foreground">Your current personal usage pattern</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-12 h-1 bg-chart-3 rounded-full"></div>
-              <span className="text-sm text-muted-foreground">Average daily yield</span>
-            </div>
+          <div className="flex items-center gap-2">
+            <div className="w-12 h-2 bg-[#FFE70F]"></div>
+            <span className="text-sm text-muted-foreground">Average daily yield</span>
           </div>
-        </Card>
-
-        {/* Navigation */}
-        <div className="flex justify-between items-center">
-          <Button
-            variant="outline"
-            size="lg"
-            onClick={onPrevious}
-            className="font-medium"
-            data-testid="button-previous"
-          >
-            <ArrowLeft className="mr-2 w-5 h-5" />
-            Previous
-          </Button>
-          <Button
-            size="lg"
-            onClick={onNext}
-            className="bg-primary hover:bg-primary text-primary-foreground font-medium"
-            data-testid="button-next"
-          >
-            Next
-            <ArrowRight className="ml-2 w-5 h-5" />
-          </Button>
         </div>
       </div>
+
     </div>
   );
 }
